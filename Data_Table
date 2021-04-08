@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatefulWidget {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Mahasiswa> mahasiswa;  //deklarasi
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor : Colors.grey,
+      appBar: AppBar(
+        backgroundColor : Colors.redAccent,
+        title: Text('PUTRI MELLYANI - Kelas 6SIA6 Mobile2'),
+      ),
+      body: ListView(children: <Widget>[
+        Center(
+            child: Text('Data Mahasiswa',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+        DataTable(
+          columns: [
+            DataColumn(label: Text('NIRM')),
+            DataColumn(label: Text('NAMA MAHASISWA')),
+            DataColumn(label: Text('JURUSAN')),
+          ],
+          rows: Mahasiswa.getMahasiswa()
+  .map(
+    (mahasiswa) => DataRow(cells: [
+      DataCell(Text(mahasiswa.nirm)),
+      DataCell(Text(mahasiswa.namamhs)),
+      DataCell(Text(mahasiswa.jurusan)),
+    ]),
+  )
+  .toList(),   
+        ),
+      ]),
+    );
+  }
+}
+class Mahasiswa {
+  //Attribut
+  String nirm;
+  String namamhs;
+  String jurusan;
+
+  //Constructor
+  Mahasiswa({this.nirm, this.namamhs, this.jurusan});
+
+  //Data List
+  static List<Mahasiswa> getMahasiswa() {
+    return <Mahasiswa>[
+      Mahasiswa(nirm: "2018020328", namamhs: "PUTRI MELLYANI", jurusan: "SISTEM INFORMASI"),
+      Mahasiswa(nirm: "2018020316", namamhs: "YULITA DEVI", jurusan: "SISTEM INFORMASI"),
+      Mahasiswa(nirm: "2018020734", namamhs: "KHAIRIL ADHA", jurusan: "SISTEM INFORMASI"),
+      Mahasiswa(nirm: "2018020668", namamhs: "ADEL FINA DIYANI", jurusan: "SISTEM INFORMASI"),
+      Mahasiswa(nirm: "2018020776", namamhs: "JEKWIN SIMATUPANG", jurusan: "SISTEM INFORMASI"),
+    ];
+  }
+}
